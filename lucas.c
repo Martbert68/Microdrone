@@ -70,7 +70,7 @@ void lamps_thread()
 			toff[x]=ticks_off[x];
 			ton[x]=ticks_on[x];
 			tick[x]=ton[x];
-		}else if (tick[x]==toff[x]){
+		}else if (tick[x]>=toff[x]){
 			gpio_put(D0+x,1);
 		}
 
@@ -79,7 +79,7 @@ void lamps_thread()
 		if (px>toff[x]){px-=toff[x];}
 		if (px==ton[x]){ 
 			gpio_put(D0+x+1,0);
-		}else if (px==toff[x]){
+		}else if (px>=toff[x]){
 			gpio_put(D0+x+1,1);
 		} 
 
@@ -137,7 +137,7 @@ int init_pins ()
 int main()
 {
 	// adding stdio causes interrupts and slows everything down. Debug only.
-    	stdio_init_all();
+    	//stdio_init_all();
 	init_pins();
 
 	sleep_ms(100);
@@ -159,6 +159,7 @@ int main()
 	a=1;
     	multicore_launch_core1(lamps_thread);
 	float ncent;
+	float mcent;
 	float nfact;
 	float dec;
 
@@ -170,12 +171,13 @@ int main()
 		sleep_us(30);
 
     		adc_select_input(0);
-       		ncent = ((float)adc_read()/3)+40;
+       		ncent = ((float)adc_read());
 		cent=((1000*cent)+ncent)/1001;
     		adc_select_input(1);
        		nfact = (float)adc_read()/2048;
 		//if (nfact<0.005){nfact=0;}
-		fact=((5*fact)+nfact)/6;
+		fact=((1000*fact)+nfact)/1001;
+		mcent=40+((cent*cent)/4000);
 
 		press=gpio_get(I0); 
 		if ( press){ 
@@ -194,12 +196,8 @@ int main()
 		for (x=0;x<16;x+=2)
 		{
 			float f,df;
-			df=(((float)(7-x))*fact/50);
-			if (df<0){ 
-				f=cent-((df*df*cent));
-			}else{
-				f=cent+((df*df*cent));
-			}
+			df=(((float)(7-x))*fact/8);
+			f=mcent+((df*mcent));
 			ticks_on[x]=1000000/(2*f*DELAY);
 			ticks_off[x]=ticks_on[x]*2;
 			phase[x]=((1-a)*(float)ticks_on[x]);
