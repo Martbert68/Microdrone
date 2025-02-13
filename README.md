@@ -1,4 +1,23 @@
-# Microdrone
+# Microdrone QUADMODE
+
+Welcome to Quadmode! I will describe this is part 3 of the Video series. Which I haven't filmed yet.
+
+At the end of part two the Microdrone had one operating mode. To change modes I would have needed to add another switch and I really didnt want to change the hardware.
+I also wanted to be able free the oscillators from 8 frepeqncy locked; phase shifters into 16 oscillators.
+
+The solution! Depending on the position of the tuning knob at power on, left or right, the code branches in two ways.
+Press the button at power on and two more modes are availabe.
+
+This version of the code has 4 modes
+
+1) Classic phase shifted algorithm
+2) A quad note drone builder that has a random walk in the frequencies. Makes giant, ominous droning.
+3) A tinkabell. 16 exponentially spaced notes switch on and off in sequence.
+4) 16 random frequencies that hold for a random amount of time. Its a perfect mode
+
+I was going to quantize this thing to real notes...maybe that will be an option in the next release but I have sealed the case and disconnected the SWD cables now.
+
+
 This is the code for the microdrone. It is a very simple 8 oscillator audio drone.
 
 I describe its conception here. I doni't see this as a "thing" more of a demonstration and
