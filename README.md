@@ -1,4 +1,7 @@
 # Microdrone
+
+(Check out the Quadmode branch...takes it from Zero to Hero)
+
 This is the code for the microdrone. It is a very simple 8 oscillator audio drone.
 
 I describe its conception here. I doni't see this as a "thing" more of a demonstration and
