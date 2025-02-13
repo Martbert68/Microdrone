@@ -13,7 +13,7 @@ This version of the code has 4 modes
 1) Classic phase shifted algorithm
 2) A quad note drone builder that has a random walk in the frequencies. Makes giant, ominous droning.
 3) A tinkabell. 16 exponentially spaced notes switch on and off in sequence.
-4) 16 random frequencies that hold for a random amount of time. Its a perfect mode
+4) 16 random frequencies that hold for a random amount of time. Its a perfect mode if you want a little droney blast after a difficult phone converastion.
 
 I was going to quantize this thing to real notes...maybe that will be an option in the next release but I have sealed the case and disconnected the SWD cables now.
 
